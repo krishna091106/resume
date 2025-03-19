@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Streaming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding-top: 60px;
+            text-align: center;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #1e1e1e;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        .container {
+            width: 320px;
+            background: linear-gradient(to bottom, #1e1e1e, #121212);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin: auto;
+            margin-bottom: 80px; /* Leave space for bottom song list */
+        }
+
+        .cover img {
+            width: 80%;
+            max-width: 180px;
+            border-radius: 10px;
+        }
+
+        .info {
+            margin: 10px 0;
+        }
+
+        .controls button {
+            padding: 5px 12px;
+            margin: 3px;
+            border: none;
+            cursor: pointer;
+            background-color: #1DB954;
+            color: white;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .timeline {
+            width: 100%;
+            margin-top: 8px;
+            cursor: pointer;
+            background-color: #1DB954;
+        }
+
+        /* Time display styling */
+        .time-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-top: 5px;
+            color: #bbb;
+        }
+
+        /* Bottom Song List */
+        .bottom-songs {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #1e1e1e;
+            padding: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .song-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .song-item:hover {
+            background: #292929;
+        }
+
+        .song-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .song-details {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .song-details h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .song-details p {
+            margin: 0;
+            font-size: 12px;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">Music Streaming</div>
+
+    <!-- Main Music Player -->
+    <div class="container">
+        <div class="cover">
+            <img id="coverImage" src="img/FUCK KALVE.jpg" alt="Song Cover">
+        </div>
+        <div class="info">
+            <h2 id="songTitle">FUCK KALVE</h2>
+            <p id="artistName">KRISHNA</p>
+        </div>
+        <div class="controls">
+            <button onclick="previousSong()">&#9665;</button>
+            <button id="playPauseButton" onclick="togglePlayPause()">▶</button>
+            <button onclick="nextSong()">&#9655;</button>
+            <input type="range" id="progress" class="timeline" value="0" max="100">
+        </div>
+
+        <div class="time-info">
+            <span id="currentTime">0:00</span>
+            <span id="totalTime">0:00</span>
+        </div>
+
+        <audio id="audio">
+            <source id="audioSource" src="songs/FUCK KALVE.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <!-- Bottom Song List -->
+    <div class="bottom-songs" id="songList">
+        <!-- Songs will be loaded here dynamically -->
+    </div>
+
+    <script>
+        let isPlaying = false;
+        const audio = document.getElementById('audio');
+        const playPauseButton = document.getElementById('playPauseButton');
+        const progress = document.getElementById('progress');
+
+        const currentTimeDisplay = document.getElementById('currentTime');
+        const totalTimeDisplay = document.getElementById('totalTime');
+
+        const songs = [
+            { src: 'songs/FUCK KALVE.mp3', title: 'FUCK KALVE', artist: 'KRISHNA', cover: 'img/FUCK KALVE.jpg' },
+            { src: 'songs/SCHOOL TIME.mp3', title: 'SCHOOL TIME', artist: 'KRISHNA', cover: 'img/SCHOOL TIME.jpg' },
+            { src: 'songs/BEAT DROP.mp3', title: 'BEAT DROP', artist: 'KRISHNA', cover: 'img/BEAT DROP.jpg' }
+        ];
+        let currentSongIndex = 0;
+
+        function togglePlayPause() {
+            if (isPlaying) {
+                audio.pause();
+                playPauseButton.innerText = '▶';
+            } else {
+                audio.play();
+                playPauseButton.innerText = '⏸';
+            }
+            isPlaying = !isPlaying;
+        }
+
+        function updateTime() {
+            const currentTime = audio.currentTime;
+            const duration = audio.duration;
+
+            currentTimeDisplay.innerText = formatTime(currentTime);
+            totalTimeDisplay.innerText = formatTime(duration);
+
+            progress.value = (currentTime / duration) * 100;
+        }
+
+        function formatTime(seconds) {
+            if (isNaN(seconds) || seconds < 0) return "0:00";
+            let min = Math.floor(seconds / 60);
+            let sec = Math.floor(seconds % 60);
+            return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        function updateProgressBar() {
+            if (!isPlaying) return;
+            updateTime();
+            requestAnimationFrame(updateProgressBar);
+        }
+
+        progress.addEventListener('input', function() {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+            updateTime();
+        });
+
+        function previousSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(songs[currentSongIndex]);
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(songs[currentSongIndex]);
+        }
+
+        function loadSong(song) {
+            audio.src = song.src;
+            document.getElementById('songTitle').innerText = song.title;
+            document.getElementById('artistName').innerText = song.artist;
+            document.getElementById('coverImage').src = song.cover;
+            audio.load();
+            audio.play();
+            playPauseButton.innerText = '⏸';
+            isPlaying = true;
+            audio.onloadedmetadata = updateTime;
+            updateProgressBar();
+        }
+
+        audio.ontimeupdate = updateTime;
+
+        function displaySongList() {
+            const songListDiv = document.getElementById('songList');
+            songListDiv.innerHTML = '';
+
+            songs.forEach((song, index) => {
+                const songItem = document.createElement('div');
+                songItem.classList.add('song-item');
+                songItem.innerHTML = `
+                    <img src="${song.cover}" alt="Cover">
+                    <div class="song-details">
+                        <h4>${song.title}</h4>
+                        <p>${song.artist}</p>
+                    </div>
+                `;
+                songItem.onclick = () => loadSong(songs[index]);
+                songListDiv.appendChild(songItem);
+            });
+        }
+
+        displaySongList();
+    </script>
+
+</body>
+</html>
