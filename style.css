@@ -31,7 +31,7 @@ nav a {
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
-  padding: 5px 20px;
+  padding: 0px 20px;
   border-radius: 8px;
   transition: all 0.3s;
 }
@@ -580,11 +580,9 @@ ul {
 /* MOBILE RESPONSIVENESS AND PROJECT SCROLLING */
 @media (max-width: 900px) {
 
-  /* nav ul {
-    flex-direction: column;
+  nav ul {
     gap: 10px;
-    border: none;
-  } */
+  }
 
   .home h1:first-child {
     font-size: 30px;
