@@ -31,7 +31,7 @@ nav a {
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
-  padding: 0px 20px;
+  padding: 10px 20px;
   border-radius: 8px;
   transition: all 0.3s;
 }
@@ -452,7 +452,7 @@ ul {
 /* Each clickable project box */
 .project-box {
   flex: 0 0 auto;
-  width: 450px;
+  width: 350px;
   background-color: #ffffff;
   border-radius: 15px;
   border: 5px solid #ffffff;
@@ -484,6 +484,31 @@ ul {
   font-size: 30px;
 }
 
+#projects.fullscreen {
+  position: relative;
+  z-index: 999;
+}
+
+.project-box.fullview {
+  width: 100% !important;
+  position: relative;
+  z-index: 1000;
+}
+
+.project-details {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.project-details img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
 .more{
   display: flex;
   align-items: center;
@@ -504,6 +529,25 @@ ul {
   background-color: #ffffff;
   margin: 3px;
 }
+
+#live {
+  font-size: 20px;
+  text-decoration: none;
+  color: #000000;
+  background-color:#fff;
+  margin: 10px 10px 50px 10px;
+  padding: 0px 15px;
+  border-radius: 30px;
+  border: 2px solid black;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+}
+#live {
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
 /* Contact Section */
 .contact {
   max-width: 600px;
@@ -580,9 +624,11 @@ ul {
 /* MOBILE RESPONSIVENESS AND PROJECT SCROLLING */
 @media (max-width: 900px) {
 
-  nav ul {
+  /* nav ul {
+    flex-direction: column;
     gap: 10px;
-  }
+    border: none;
+  } */
 
   .home h1:first-child {
     font-size: 30px;
