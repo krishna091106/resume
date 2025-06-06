@@ -33,7 +33,7 @@
         <h1>HELLO I'M</h1>
         <h1>KRISHNA</h1>
         <p>aryakrishna091106@gmail.com</p>
-        <p>+91 7567091106</p>
+        <p>+91 9484758840</p>
         <div class="home-button">
           <a href="project.html">Projects</a>
           <a href="#contact">Contact</a>
@@ -124,6 +124,7 @@
     </div>
     <hr color="#111">
     <!-- Education -->
+    <!-- Education -->
     <div id="education">
       <h1>Education</h1>
       <div class="timeline">
@@ -176,21 +177,60 @@
     <h1 class="project-text">Projects</h1>
     <section id="projects">
       <div class="project-scroll">
-        <a href="" class="project-box">
+        <div class="project-box">
           <img src="aavara.png" alt="AAVARA">
           <h2>AAVARA</h2>
           <p>HTML, CSS, JAVASCRIPT AND PHP</p>
-        </a>
-        <a href="https://krishna091106.github.io/carluxe/home.html" class="project-box">
-          <img src="home.png" alt="CarLuxe">
+          <div class="project-details" style="display: none;">
+            <img src="photos/aavara1.png" alt="">
+            <img src="photos/aavara2.png" alt="">
+            <img src="photos/aavara3.png" alt="">
+            <img src="photos/aavara4.png" alt="">
+            <img src="photos/aavara5.png" alt="">
+            <div class="live-box">
+              <!-- <img src="icons8-mulled-wine.gif" alt=""> -->
+              <a id="live" href="http://aavara.42web.io/">
+                live view</a>
+              </div>
+          </div>
+        </div>
+
+        <div class="project-box">
+          <img src="home.png" alt="carluxe">
           <h2>CARLUXE</h2>
-          <p>HTML, CSS AND JAVASCRIPT</p>
-        </a>
-        <a href="https://krishna091106.github.io/Song-/" class="project-box">
+          <p>HTML, CSS,AND JAVASCRIPT</p>
+          <div class="project-details" style="display: none;">
+            <img src="photos/carluxe1.png" alt="">
+            <img src="photos/carluxe2.png" alt="">
+            <img src="photos/carluxe3.png" alt="">
+            <img src="photos/carluxe4.png" alt="">
+            <img src="photos/carluxe5.png" alt="">
+            <div class="live-box">
+              <!-- <img src="icons8-mulled-wine.gif" alt=""> -->
+              <a id="live" href="https://krishna091106.github.io/carluxe/home.html">
+                live view</a>
+              </div>
+          </div>
+        </div>
+
+        <div class="project-box">
           <img src="music.png" alt="music">
           <h2>MUSIC STREAMING</h2>
-          <p>HTML, CSS AND JAVASCRIPT</p>
-        </a>
+          <p>HTML, CSS,AND JAVASCRIPT</p>
+          <div class="project-details" style="display: none;">
+            <!-- <img src="photos/aavara1.png" alt="">
+            <img src="photos/aavara2.png" alt="">
+            <img src="photos/aavara3.png" alt="">
+            <img src="photos/aavara4.png" alt="">
+            <img src="photos/aavara5.png" alt=""> -->
+            <div class="live-box">
+              <!-- <img src="icons8-mulled-wine.gif" alt=""> -->
+              <a id="live" href="https://krishna091106.github.io/Song-/index.html">
+                live view</a>
+              </div>
+          </div>
+        </div>
+
         <a href="project.html" class="project-box more">
           <div>
             <ul></ul>
@@ -224,6 +264,67 @@
         document.getElementById("loader").style.display = "none";
         document.getElementById("main-content").classList.remove("hidden");
       });
+
+
+  const boxes = document.querySelectorAll('.project-box');
+  const projectsSection = document.getElementById('projects');
+  let activeBox = null;
+
+  boxes.forEach(box => {
+    box.addEventListener('click', function (e) {
+      e.stopPropagation(); // Prevent triggering the body click
+
+      // Remove other boxes
+      boxes.forEach(otherBox => {
+        if (otherBox !== box) {
+          otherBox.style.display = 'none';
+        }
+      });
+
+      // Expand this box
+      box.classList.add('fullview');
+      projectsSection.classList.add('fullscreen');
+
+      // Hide h2 and p
+      const h2 = box.querySelector('h2');
+      const p = box.querySelector('p');
+      if (h2) h2.style.display = 'none';
+      if (p) p.style.display = 'none';
+
+      // Show images
+      const details = box.querySelector('.project-details');
+      if (details) {
+        details.style.display = 'flex';
+      }
+
+      activeBox = box;
+    });
+  });
+
+  // Click outside to close the fullview
+  document.body.addEventListener('click', function () {
+    if (activeBox) {
+      activeBox.classList.remove('fullview');
+      projectsSection.classList.remove('fullscreen');
+
+      // Show all boxes again
+      boxes.forEach(box => {
+        box.style.display = 'block';
+
+        const h2 = box.querySelector('h2');
+        const p = box.querySelector('p');
+        const details = box.querySelector('.project-details');
+
+        if (h2) h2.style.display = 'block';
+        if (p) p.style.display = 'block';
+        if (details) details.style.display = 'none';
+      });
+
+      activeBox = null;
+    }
+  });
+
+
     </script>
 </body>
 
