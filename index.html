@@ -4,11 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="images/gif" href="r.gif">
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 
 <body>
+  <div id="open">
+    <img src="rocket-256.png" alt="" srcset="">
+  </div>
+
   <nav>
     <ul>
       <a href="#about">About</a>
@@ -174,158 +179,102 @@
 
     <hr color="#111">
     <!-- Projects -->
-    <h1 class="project-text">Projects</h1>
-    <section id="projects">
-      <div class="project-scroll">
-        <div class="project-box">
-          <img src="aavara.png" alt="AAVARA">
-          <h2>AAVARA</h2>
+    <h1 class="p-t">Projects</h1>
+
+    <div class="project-item">
+      <div id="projects-text">
+        <b>#1</b>
+        <h2>AAVARA</h2>
+        <samp>
           <p>HTML, CSS, JAVASCRIPT AND PHP</p>
-          <div class="project-details" style="display: none;">
-            <img src="photos/aavara1.png" alt="">
-            <img src="photos/aavara2.png" alt="">
-            <img src="photos/aavara3.png" alt="">
-            <img src="photos/aavara4.png" alt="">
-            <img src="photos/aavara5.png" alt="">
-            <div class="live-box">
-              <!-- <img src="icons8-mulled-wine.gif" alt=""> -->
-              <a id="live" href="http://aavara.42web.io/">
-                live view</a>
-              </div>
-          </div>
+        </samp>
+        <div href="" id="img-box">
+          <img src="aavara.png" alt="">
+          <img src="photos/aavara2.png" alt=""> 
         </div>
-
-        <div class="project-box">
-          <img src="home.png" alt="carluxe">
-          <h2>CARLUXE</h2>
-          <p>HTML, CSS,AND JAVASCRIPT</p>
-          <div class="project-details" style="display: none;">
-            <img src="photos/carluxe1.png" alt="">
-            <img src="photos/carluxe2.png" alt="">
-            <img src="photos/carluxe3.png" alt="">
-            <img src="photos/carluxe4.png" alt="">
-            <img src="photos/carluxe5.png" alt="">
-            <div class="live-box">
-              <!-- <img src="icons8-mulled-wine.gif" alt=""> -->
-              <a id="live" href="https://krishna091106.github.io/carluxe/home.html">
-                live view</a>
-              </div>
-          </div>
-        </div>
-
-        <div class="project-box">
-          <img src="music.png" alt="music">
-          <h2>MUSIC STREAMING</h2>
-          <p>HTML, CSS,AND JAVASCRIPT</p>
-          <div class="project-details" style="display: none;">
-            <!-- <img src="photos/aavara1.png" alt="">
-            <img src="photos/aavara2.png" alt="">
-            <img src="photos/aavara3.png" alt="">
-            <img src="photos/aavara4.png" alt="">
-            <img src="photos/aavara5.png" alt=""> -->
-            <div class="live-box">
-              <!-- <img src="icons8-mulled-wine.gif" alt=""> -->
-              <a id="live" href="https://krishna091106.github.io/Song-/index.html">
-                live view</a>
-              </div>
-          </div>
-        </div>
-
-        <a href="project.html" class="project-box more">
-          <div>
-            <ul></ul>
-            <ul></ul>
-            <ul></ul>
-          </div>
-          <h2>MORE</h2>
-        </a>
       </div>
-    </section>
-
-    <hr color="#111">
-
-    <!-- Contact -->
-    <div class="contact">
-      <h1>Contact</h1>
-      <form action="#" method="post" id="contact">
-        <div>
-          <input type="text" name="frist" id="frist" placeholder="Frist name">
-          <input type="text" name="last" id="last" placeholder="Last name">
+    </div>
+    <div class="project-item">
+      <div id="projects-text">
+        <b>#2</b>
+        <h2>CarLuxe</h2>
+        <samp>
+          <p>HTML, CSS, AND JAVASCRIP</p>
+        </samp>
+        <div href="" id="img-box">
+          <img src="home.png" alt="">
+          <img src="photos/carluxe2.png" alt="">
         </div>
-        <input type="email" name="email" id="email" placeholder="Email">
-        <textarea name="message" id="massage" placeholder="Your Message"></textarea>
-        <input type="button" value="Send Massage">
-      </form>
+      </div>
+    </div>
+    <div class="project-item">
+      <div id="projects-text">
+        <b>#3</b>
+        <h2>Music</h2>
+        <samp>
+          <p>HTML, CSS, AND JAVASCRIPT</p>
+        </samp>
+        <div href="" id="img-box">
+          <img src="music.png" alt="">
+        </div>
+      </div>
     </div>
 
-    <script>
-      // Wait for the page to fully load
-      window.addEventListener("load", function () {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("main-content").classList.remove("hidden");
-      });
 
 
-  const boxes = document.querySelectorAll('.project-box');
-  const projectsSection = document.getElementById('projects');
-  let activeBox = null;
+    <!-- Add more .project-item as needed -->
+    
+  </div>
 
-  boxes.forEach(box => {
-    box.addEventListener('click', function (e) {
-      e.stopPropagation(); // Prevent triggering the body click
 
-      // Remove other boxes
-      boxes.forEach(otherBox => {
-        if (otherBox !== box) {
-          otherBox.style.display = 'none';
-        }
-      });
+  <hr color="#111">
 
-      // Expand this box
-      box.classList.add('fullview');
-      projectsSection.classList.add('fullscreen');
+  <!-- Contact -->
+  <div class="contact">
+    <h1>Contact</h1>
+    <form action="#" method="post" id="contact">
+      <div>
+        <input type="text" name="frist" id="frist" placeholder="Frist name">
+        <input type="text" name="last" id="last" placeholder="Last name">
+      </div>
+      <input type="email" name="email" id="email" placeholder="Email">
+      <textarea name="message" id="massage" placeholder="Your Message"></textarea>
+      <input type="button" value="Send Massage">
+    </form>
+  </div>
 
-      // Hide h2 and p
-      const h2 = box.querySelector('h2');
-      const p = box.querySelector('p');
-      if (h2) h2.style.display = 'none';
-      if (p) p.style.display = 'none';
+  <script>
+//bg
 
-      // Show images
-      const details = box.querySelector('.project-details');
-      if (details) {
-        details.style.display = 'flex';
-      }
+// Loader hide
+window.addEventListener("load", function () {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("main-content").classList.remove("hidden");
+});
 
-      activeBox = box;
-    });
-  });
 
-  // Click outside to close the fullview
-  document.body.addEventListener('click', function () {
-    if (activeBox) {
-      activeBox.classList.remove('fullview');
-      projectsSection.classList.remove('fullscreen');
+const projectItems = document.querySelectorAll('.project-item');
 
-      // Show all boxes again
-      boxes.forEach(box => {
-        box.style.display = 'block';
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    const item = entry.target;
 
-        const h2 = box.querySelector('h2');
-        const p = box.querySelector('p');
-        const details = box.querySelector('.project-details');
-
-        if (h2) h2.style.display = 'block';
-        if (p) p.style.display = 'block';
-        if (details) details.style.display = 'none';
-      });
-
-      activeBox = null;
+    if (entry.isIntersecting) {
+      projectItems.forEach(p => p.classList.remove('active'));
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active'); // Important to hide when out of view
     }
   });
+}, {
+  threshold: 0.6
+});
+
+projectItems.forEach(item => observer.observe(item));
 
 
-    </script>
+  </script>
+
 </body>
 
 </html>
