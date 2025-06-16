@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="project.css">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="project.css">
+  <title>My Projects</title>
 </head>
 <body>
-    <nav>
+
+  <nav>
     <ul>
       <a href="index.html">Home</a>
       <a href="index.html#skills">Skills</a>
@@ -15,56 +16,83 @@
       <a href="index.html#contact">Contact</a>
     </ul>
   </nav>
-  <div class="main-project">
-      <div class="boxs">
-      <a href="https://aavara.42web.io/index.php">
-          <div class="box">
-              <img src="aavara.png" alt="">
-              <h1>AAVARA</h1>
-          </div>
-      </a>
-      <a href="https://krishna091106.github.io/carluxe/home.html">
-          <div class="box">
-              <img src="car-t.png" alt="">
-              <h1>CARLUXE</h1>
-          </div>
-      </a>
-      </div>
-    <a href="https://krishna091106.github.io/Song-">
-        <div class="box">
-            <img src="music-m.png" alt="">
-            <h1>MUSIC STREAMING</h1>
-        </div>
-    </a>
-    <!-- <div>
-    <a href="">
+
+  <div class="main-project" id="projectList"></div>
+
+  <!-- Modal -->
+  <div class="project-modal" id="modal">
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+
+  <script>
+    const projectData = [
+  {
+    title: "AAVARA",
+    images: ["aavara.png", "photos/aavara2.png", "photos/aavara3.png","photos/aavara4.png","photos/aavara5.png"],
+    technology: "HTML, CSS, JS, PHP, MySQL",
+    time: "6 Months",
+    about: "A full-featured eCommerce website including login, cart, orders, and secure payment.",
+    link: "https://aavara.42web.io"
+  },
+  {
+    title: "CarLuxe",
+    images: ["home.png", "photos/carluxe2.png", "photos/carluxe3.png","photos/carluxe4.png","photos/carluxe5.png"],
+    technology: "HTML, CSS, JavaScript",
+    time: "8 Months",
+    about: "Modern car showcase website with animations and responsive UI.",
+    link: "https://carluxe.example.com"
+  },
+  {
+    title: "Music",
+    images: ["music.png"],
+    technology: "HTML, CSS, JavaScript",
+    time: "2 Weeks",
+    about: "Songs",
+    link: "https://carluxe.example.com"
+  }
+];
+
+const projectList = document.getElementById("projectList");
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modalContent");
+
+// Render cards
+projectData.forEach((project, index) => {
+  const card = document.createElement("div");
+  card.className = "project-card";
+  card.innerHTML = `
+    <img src="${project.images[0]}" alt="${project.title}" class="thumbnail" />
+    <h2 id="card-h2">${project.title}</h2>
+    <p id="card-p">${project.about.substring(0, 50)}...</p>
+  `;
+  card.addEventListener("click", () => showModal(index));
+  projectList.appendChild(card);
+});
+
+// Show modal
+function showModal(index) {
+  const p = projectData[index];
+  const imagesHTML = `<div class="image-gallery">` +
+    p.images.map(img => `<img src="${img}" alt="${p.title} Image" />`).join("") +
+    `</div>`;
+  modalContent.innerHTML = `
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2>${p.title}</h2>
     <div class="box">
-        <img src="demo.png" alt="">
-        <h1>AAVARA</h1>
+    ${imagesHTML}
     </div>
-    </a>
-   </div>
-    <div>
-    <a href="">
-    <div class="box">
-        <img src="demo.png" alt="">
-        <h1>AAVARA</h1>
-    </div>
-    </a>
-   </div>
-   <div class="boxs">
-    <a href="">
-        <div class="box">
-            <img src="aavara.png" alt="">
-            <h1>AAVARA</h1>
-        </div>
-    </a>
-    <a href="">
-        <div class="box">
-            <img src="demo1.png" alt="">
-            <h1>AAVARA</h1>
-        </div>
-    </a>
-    </div> -->
+    <p><strong>Technologies:</strong> ${p.technology}</p>
+    <p><strong>Duration:</strong> ${p.time}</p>
+    <p>${p.about}</p>
+    <a class="view-btn" href="${p.link}" target="_blank">View Project</a>
+  `;
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  modal.style.display = "none";
+}
+
+  </script>
 </body>
 </html>
