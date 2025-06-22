@@ -181,7 +181,8 @@ ul {
   }
 }
 @media (max-width: 768px){
-width: 100%;
+  .image-gallery {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100%, 0fr));
     gap: 10px;
@@ -189,4 +190,5 @@ width: 100%;
     margin-bottom: 20px;
     justify-content: center;
     justify-items: center;
+  }
 }
